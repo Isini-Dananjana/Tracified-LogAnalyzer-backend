@@ -39,8 +39,6 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("File Upload Endpoint Hit")
 
-	// Parse our multipart form, 10 << 20 specifies a maximum
-	// upload of 10 MB files.
 	r.ParseMultipartForm(10 << 20)
 	// FormFile returns the first file for the given key `myFile`
 	// it also returns the FileHeader so we can get the Filename,
@@ -65,6 +63,7 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
+	//aws upload path
 	fullFilePath := "logs/" + params["user"] + "/" +params["project"] + "/" + params["log"]
 	//open new file
 	filetowrite, err := os.OpenFile(
