@@ -6,10 +6,10 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"log"
+	//"io/ioutil"
+	//"log"
 	"net/http"
-	"os"
+	//"os"
 	
 
 	log_controller "github.com/TharinduBalasooriya/LogAnalyzerBackend/src/controller"
@@ -57,33 +57,32 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 	
 
 	// read all of the contents of our uploaded file into a
-	// byte array
-	fileBytes, err := ioutil.ReadAll(file)
-	if err != nil {
-		fmt.Println(err)
-	}
+	//
+	// }
 
 	//aws upload path
 	fullFilePath := "logs/" + params["user"] + "/" +params["project"] + "/" + params["log"]
 	//open new file
-	filetowrite, err := os.OpenFile(
-		fullFilePath,
-		os.O_WRONLY|os.O_TRUNC|os.O_CREATE,
-		0666,
-	)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
+	// filetowrite, err := os.OpenFile(
+	// 	fullFilePath,
+	// 	os.O_WRONLY|os.O_TRUNC|os.O_CREATE,
+	// 	0666,
+	// )
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// defer file.Close()
 
 
-	bytesWritten, err := filetowrite.Write(fileBytes)
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Printf("Wrote %d bytes.\n", bytesWritten)
-	fmt.Fprintf(w, "Successfully Uploaded File\n")
+	// bytesWritten, err := filetowrite.Write(fileBytes)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// log.Printf("Wrote %d bytes.\n", bytesWritten)
+	// fmt.Fprintf(w, "Successfully Uploaded File\n")
 
-	fmt.Println(params["log"])
+	// fmt.Println(params["log"])
+
+	log_controller.UplaodLogFiles(fullFilePath,file) 
 
 }
