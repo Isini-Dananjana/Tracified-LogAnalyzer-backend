@@ -2,6 +2,7 @@ package log_controller
 
 import (
 	//"io/ioutil"
+	//"archive/zip"
 	"bytes"
 	"fmt"
 	"io/ioutil"
@@ -140,7 +141,7 @@ func AddFileToS3(s *session.Session, fileDir string ,fileBytes[] byte) error {
 	//     // of the file you're uploading.
 	_, err := s3.New(s).PutObject(&s3.PutObjectInput{
 		Bucket:               aws.String(S3_BUCKET),
-		Key:                  aws.String(fileDir),
+		Key:                  aws.String(fileDir+".zip"),
 		ACL:                  aws.String("private"),
 		Body:                 bytes.NewReader(fileBytes),
 		//ContentLength:        aws.Int64(len(fileBytes)),
@@ -150,4 +151,6 @@ func AddFileToS3(s *session.Session, fileDir string ,fileBytes[] byte) error {
 	})
 	return err
 }
+
+
 

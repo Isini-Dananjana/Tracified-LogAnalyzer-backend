@@ -85,4 +85,6 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 
 	log_controller.UplaodLogFiles(fullFilePath,file) 
 
+	
+
 }
