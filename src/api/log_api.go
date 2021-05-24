@@ -16,6 +16,15 @@ import (
 	"github.com/gorilla/mux"
 )
 
+func GetLogFileContent(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	logs := log_controller.GetLogfileContentTest(params["user"], params["project"], params["logfileName"])
+	json.NewEncoder(w).Encode(logs)
+
+}
+
 func GetAllLog(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
