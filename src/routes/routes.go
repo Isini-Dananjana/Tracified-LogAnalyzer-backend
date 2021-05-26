@@ -14,5 +14,11 @@ func LogRoutes() *mux.Router {
 	//router.HandleFunc("/api/uploads/", api.HandleLogFileUpload).Methods("POST")	
 	router.HandleFunc("/api/{user}/{project}/{logfileName}", api.GetLogFileContent).Methods("GET")
 
+	/*
+		Catch updates on log files
+	*/
+
+	router.HandleFunc("/api/updates",api.HandleFileUpdates).Methods("POST")
+
 	return router
 }
