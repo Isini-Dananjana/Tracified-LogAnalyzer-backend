@@ -312,5 +312,15 @@ func AddFileToS3(s *session.Session, fileDir string ,fileBytes[] byte) error {
 	return err
 }
 
+type Update struct {
+	UserName    string `json:"userName"`
+	ProjectName string `json:"project"`
+	Data        string `json:"data"`
+}
+func HandleUpdateData(update Update){
 
+	fmt.Println(update.UserName)
+	fmt.Println(update.ProjectName)
+	fmt.Println(update.Data)
 
+}

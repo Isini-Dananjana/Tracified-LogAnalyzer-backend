@@ -6,11 +6,11 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+
 	//"io/ioutil"
 	//"log"
 	"net/http"
 	//"os"
-	
 
 	log_controller "github.com/TharinduBalasooriya/LogAnalyzerBackend/src/controller"
 	"github.com/gorilla/mux"
@@ -63,14 +63,12 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("File Size: %+v\n", handler.Size)
 	fmt.Printf("MIME Header: %+v\n", handler.Header)
 
-	
-
 	// read all of the contents of our uploaded file into a
 	//
 	// }
 
 	//aws upload path
-	fullFilePath := "logs/" + params["user"] + "/" +params["project"] + "/" + params["log"]
+	fullFilePath := "logs/" + params["user"] + "/" + params["project"] + "/" + params["log"]
 	//open new file
 	// filetowrite, err := os.OpenFile(
 	// 	fullFilePath,
@@ -82,7 +80,6 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 	// }
 	// defer file.Close()
 
-
 	// bytesWritten, err := filetowrite.Write(fileBytes)
 	// if err != nil {
 	// 	log.Fatal(err)
@@ -92,8 +89,24 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 
 	// fmt.Println(params["log"])
 
-	log_controller.UplaodLogFiles(fullFilePath,file) 
+	log_controller.UplaodLogFiles(fullFilePath, file)
 
-	
+}
+
+type Update struct {
+	UserName    string `json:"userName"`
+	ProjectName string `json:"project"`
+	Data        string `json:"data"`
+}
+
+func HandleFileUpdates(w http.ResponseWriter, r *http.Request) {
+
+	var newupdate Update
+	_ = json.NewDecoder(r.Body).Decode(&newupdate)
+	log_controller.HandleUpdateData(log_controller.Update(newupdate))
+
+
+
+	json.NewEncoder(w).Encode(newupdate)
 
 }
