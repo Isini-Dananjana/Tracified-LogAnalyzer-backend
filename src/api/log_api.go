@@ -12,7 +12,7 @@ import (
 	"net/http"
 	//"os"
 
-	log_controller "github.com/TharinduBalasooriya/LogAnalyzerBackend/src/controller"
+	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/controller"
 	"github.com/gorilla/mux"
 )
 
@@ -34,15 +34,11 @@ func GetAllLog(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func GetLogFile(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	params := mux.Vars(r)
-	log := log_controller.GetLogfileContent(params["user"], params["project"], params["logfileName"])
-	json.NewEncoder(w).Encode(log)
 
-}
 
 func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
+
+	
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 
@@ -69,25 +65,6 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 
 	//aws upload path
 	fullFilePath := "logs/" + params["user"] + "/" + params["project"] + "/" + params["log"]
-	//open new file
-	// filetowrite, err := os.OpenFile(
-	// 	fullFilePath,
-	// 	os.O_WRONLY|os.O_TRUNC|os.O_CREATE,
-	// 	0666,
-	// )
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// defer file.Close()
-
-	// bytesWritten, err := filetowrite.Write(fileBytes)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// log.Printf("Wrote %d bytes.\n", bytesWritten)
-	// fmt.Fprintf(w, "Successfully Uploaded File\n")
-
-	// fmt.Println(params["log"])
 
 	log_controller.UplaodLogFiles(fullFilePath, file)
 
@@ -104,8 +81,6 @@ func HandleFileUpdates(w http.ResponseWriter, r *http.Request) {
 	var newupdate Update
 	_ = json.NewDecoder(r.Body).Decode(&newupdate)
 	log_controller.HandleUpdateData(log_controller.Update(newupdate))
-
-
 
 	json.NewEncoder(w).Encode(newupdate)
 
