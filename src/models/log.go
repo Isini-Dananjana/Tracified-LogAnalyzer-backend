@@ -11,16 +11,13 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/util/filestorage"
+	filestorageHandler "github.com/TharinduBalasooriya/LogAnalyzerBackend/src/util/filestorage"
 )
 
 /*
 This package containes all business logic log file
 
 */
-
-
-
 
 func unzipLogfile(Logs string) {
 
@@ -85,7 +82,6 @@ func unzipLogfile(Logs string) {
 	}
 }
 
-
 /*
 	Upload a file
 */
@@ -98,22 +94,21 @@ func Log_uploadFiles(fs filestorageHandler.FileStorage) {
 
 }
 
+func Log_GetContent(file_object filestorageHandler.File, logfileName string) []byte {
 
-func Log_GetContent(file_object filestorageHandler.File , logfileName string)[]byte{
+	fileExtension := os.Getenv("FILE_EXT")
 
-   
 	err := file_object.GetContent()
 	if err != nil {
 		log.Fatal(err)
 	}
 	unzipLogfile(logfileName)
 
-	data, err := ioutil.ReadFile("temp/" + logfileName+ ".txt")
+	data, err := ioutil.ReadFile("temp/" + logfileName + fileExtension)
 	if err != nil {
 		panic(err)
 	}
 
 	return data
-	
 
 }
