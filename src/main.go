@@ -9,7 +9,7 @@ import (
 	
 )
 
-
+// LoadEnv /*
 func LoadEnv(){
 
 	err := godotenv.Load(".env")
@@ -20,15 +20,20 @@ func LoadEnv(){
 
 	
 }
+
+
+/*
+ Entry point
+*/
 func main() {
 
 	//Starting the API server
 	router := routes.LogRoutes()
 	http.Handle("/api/", router)
 
-	//Starting the FileServer
-	//fs := http.FileServer(http.Dir("server/webapps/play_maths"))
-	//http.Handle("/", fs)
+
+	//Load the env file
+	LoadEnv()
 
 	log.Println("Listening...")
 	log.Fatal(http.ListenAndServe(":3000", nil))

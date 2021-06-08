@@ -9,17 +9,19 @@ func LogRoutes() *mux.Router {
 	var router = mux.NewRouter()
 	router = mux.NewRouter().StrictSlash(true)
 
-	
+	//Get All Log files
+
+		//TODO :  Configure to work with mongodb
+
 	router.HandleFunc("/api/{user}/{project}", api.GetAllLog).Methods("GET")
-	//router.HandleFunc("/api/{user}/{project}/{logfileName}", api.GetLogFile).Methods("GET")
+
+	//upload file
 	router.HandleFunc("/api/uploads/{user}/{project}/{log}", api.HandleLogFileUpload).Methods("POST")
-	//router.HandleFunc("/api/uploads/", api.HandleLogFileUpload).Methods("POST")	
+
+	//read the log file content
 	router.HandleFunc("/api/{user}/{project}/{logfileName}", api.GetLogFileContent).Methods("GET")
 
-	/*
-		Catch updates on log files
-	*/
-
+	//catch the log file updates
 	router.HandleFunc("/api/updates",api.HandleFileUpdates).Methods("POST")
 
 	return router

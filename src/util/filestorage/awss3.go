@@ -29,7 +29,7 @@ const (
 func (fs AWS_S3) AddFiles() error {
 	_, err := s3.New(fs.Session).PutObject(&s3.PutObjectInput{
 		Bucket: aws.String(S3_BUCKET),
-		Key:    aws.String(fs.Filepath + ".zip"),
+		Key:    aws.String(fs.Filepath + os.Getenv("ARCHIVED_EXT")),
 		ACL:    aws.String("private"),
 		Body:   bytes.NewReader(fs.FileBytes),
 		//ContentLength:        aws.Int64(len(fileBytes)),

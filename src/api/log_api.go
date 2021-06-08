@@ -16,20 +16,28 @@ import (
 	"github.com/gorilla/mux"
 )
 
+
+/*
+	Read the content of log file
+*/
 func GetLogFileContent(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
-	logs := log_controller.GetLogfileContentTest(params["user"], params["project"], params["logfileName"])
+	logs := controller.LogGetFileContent(params["user"], params["project"], params["logfileName"])
 	json.NewEncoder(w).Encode(logs)
 
 }
+
+
+
+
 
 func GetAllLog(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
-	logs := log_controller.GetFileList(params["user"], params["project"])
+	logs := controller.GetFileList(params["user"], params["project"])
 	json.NewEncoder(w).Encode(logs)
 
 }
@@ -59,14 +67,12 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("File Size: %+v\n", handler.Size)
 	fmt.Printf("MIME Header: %+v\n", handler.Header)
 
-	// read all of the contents of our uploaded file into a
-	//
-	// }
 
 	//aws upload path
 	fullFilePath := "logs/" + params["user"] + "/" + params["project"] + "/" + params["log"]
 
-	log_controller.UplaodLogFiles(fullFilePath, file)
+	//controller.LogUploadFiles(fullFilePath, file)
+	controller.LogUploadFiles(fullFilePath,file)
 
 }
 
@@ -80,7 +86,7 @@ func HandleFileUpdates(w http.ResponseWriter, r *http.Request) {
 
 	var newupdate Update
 	_ = json.NewDecoder(r.Body).Decode(&newupdate)
-	log_controller.HandleUpdateData(log_controller.Update(newupdate))
+	controller.HandleUpdateData(controller.Update(newupdate))
 
 	json.NewEncoder(w).Encode(newupdate)
 

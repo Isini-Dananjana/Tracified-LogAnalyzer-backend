@@ -1,4 +1,4 @@
-package log_controller
+package controller
 
 import (
 	//"io/ioutil"
@@ -55,30 +55,9 @@ func GetFileList(user string, project string) Loglist {
 	return loglist
 }
 
-/*
-	TODO:Remove Log File Content
-*/
-// func GetLogfileContent(user string, project string, Logs string) LogContent {
 
-// 	root := "logs/" + user + "/" + project
 
-// 	data, err := ioutil.ReadFile(root + "/" + Logs + ".txt")
-// 	if err != nil {
-// 		panic(err)
-// 	}
-
-// 	var dataT = string(data)
-
-// 	logcontent := LogContent{
-// 		FileName: Logs,
-// 		Content:  dataT,
-// 	}
-
-// 	return logcontent
-
-// }
-
-func GetLogfileContentTest(user string, project string, log string) LogContent {
+func LogGetFileContent(user string, project string, log string) LogContent {
 
 	bucket := "leadl/logs/" + user + "/" + project + "/"
 	//bucket := "leadl/logs/Isini/99xIT/"
@@ -116,7 +95,7 @@ const (
 	S3_BUCKET = "leadl"
 )
 
-func UplaodLogFiles(path string, inputfile multipart.File) {
+func LogUploadFiles(path string, inputfile multipart.File) {
 
 	// byte array
 	fileBytes, err := ioutil.ReadAll(inputfile)
@@ -135,6 +114,7 @@ func UplaodLogFiles(path string, inputfile multipart.File) {
 	 Create a file storage type object
 	*/
 
+	//S3 type object
 	s3 := filestorageHandler.AWS_S3{
 		Session:   s,
 		Filepath:  path,
