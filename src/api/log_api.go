@@ -73,6 +73,7 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 
 	//controller.LogUploadFiles(fullFilePath, file)
 	controller.LogUploadFiles(fullFilePath,file)
+	controller.LogSaveDetails(params["user"],params["project"],params["log"])
 
 }
 

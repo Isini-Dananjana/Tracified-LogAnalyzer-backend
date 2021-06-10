@@ -10,7 +10,10 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"time"
 
+	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/datamodels"
+	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/repository"
 	filestorageHandler "github.com/TharinduBalasooriya/LogAnalyzerBackend/src/util/filestorage"
 )
 
@@ -18,6 +21,8 @@ import (
 This package containes all business logic log file
 
 */
+
+var logrepo repository.LogRepository
 
 func unzipLogfile(Logs string) {
 
@@ -87,13 +92,26 @@ func unzipLogfile(Logs string) {
 */
 func Log_uploadFiles(fs filestorageHandler.FileStorage) {
 
+	
 	err := fs.AddFiles() // calling add files function of the file storage
 	if err != nil {
 		log.Fatal(err)
 	}
 
 }
+func Log_Save_Details(userName string, projectName string,logFileName string)(interface{},error){
+	log := datamodels.Log{
+		Username: userName,
+		LogFileName: logFileName,
+		ProjectName: projectName,
+		LastUpdate: time.Now().String(),
+		
+	}
+	resultID,err :=logrepo.SaveLog(log);
+	return resultID,err;
+	
 
+}
 func Log_GetContent(file_object filestorageHandler.File, logfileName string) []byte {
 
 	fileExtension := os.Getenv("FILE_EXT")

@@ -18,6 +18,7 @@ import (
 	filestorageHandler "github.com/TharinduBalasooriya/LogAnalyzerBackend/src/util/filestorage"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Loglist struct {
@@ -95,6 +96,20 @@ const (
 	S3_BUCKET = "leadl"
 )
 
+func LogSaveDetails(userName string, projectName string,logFileName string){
+	results,err:=models.Log_Save_Details(userName,projectName,logFileName);
+
+	if err != nil{
+		log.Fatal(err)
+
+	}
+
+	id := results.(primitive.ObjectID);
+	fmt.Println("Successgully inserted" + id.String())
+	
+
+}
+
 func LogUploadFiles(path string, inputfile multipart.File) {
 
 	// byte array
@@ -124,6 +139,9 @@ func LogUploadFiles(path string, inputfile multipart.File) {
 	models.Log_uploadFiles(s3)
 
 }
+
+
+
 
 type Update struct {
 	UserName    string `json:"userName"`
