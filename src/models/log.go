@@ -21,9 +21,9 @@ This package containes all business logic log file
 
 func unzipLogfile(Logs string) {
 
-	fmt.Println("temp/" + Logs + ".txt.zip")
+	fmt.Println("temp/" + Logs + os.Getenv("BUCKET_ITEM_EXT"))
 
-	zipReader, err := zip.OpenReader("temp/" + Logs + ".txt.zip")
+	zipReader, err := zip.OpenReader("temp/" + Logs + os.Getenv("BUCKET_ITEM_EXT"))
 	if err != nil {
 		log.Fatal(err)
 	}

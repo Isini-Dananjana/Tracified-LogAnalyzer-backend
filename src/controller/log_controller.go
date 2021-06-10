@@ -60,11 +60,11 @@ func GetFileList(user string, project string) Loglist {
 func LogGetFileContent(user string, project string, log string) LogContent {
 
 	bucket := "leadl/logs/" + user + "/" + project + "/"
-	//bucket := "leadl/logs/Isini/99xIT/"
+	
 	/*
 		TODO:change extension to config
 	*/
-	item := log + ".txt.zip"
+	item := log + os.Getenv("BUCKET_ITEM_EXT")
 
 	//fmt.Print(bucket+item)
 
