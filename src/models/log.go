@@ -5,16 +5,14 @@ import (
 	//Importing file storage utility
 	"archive/zip"
 	"fmt"
+	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/datamodels"
+	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/repository"
+	filestorageHandler "github.com/TharinduBalasooriya/LogAnalyzerBackend/src/util/filestorage"
 	"io"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
-	"time"
-
-	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/datamodels"
-	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/repository"
-	filestorageHandler "github.com/TharinduBalasooriya/LogAnalyzerBackend/src/util/filestorage"
 )
 
 /*
@@ -99,19 +97,19 @@ func Log_uploadFiles(fs filestorageHandler.FileStorage) {
 	}
 
 }
-func Log_Save_Details(userName string, projectName string,logFileName string)(interface{},error){
-	log := datamodels.Log{
-		Username: userName,
-		LogFileName: logFileName,
-		ProjectName: projectName,
-		LastUpdate: time.Now().String(),
-		
-	}
+func Log_Save_Details(log datamodels.Log)(interface{},error){
+
+
+	/*
+		check exsitintess
+	*/
+	logrepo.CheckLogExist(log)
 	resultID,err :=logrepo.SaveLog(log);
 	return resultID,err;
 	
 
 }
+
 func Log_GetContent(file_object filestorageHandler.File, logfileName string) []byte {
 
 	fileExtension := os.Getenv("FILE_EXT")

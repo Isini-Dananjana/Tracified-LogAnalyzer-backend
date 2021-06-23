@@ -1,8 +1,10 @@
 package repository
 
-import (
+import  (
 	"context"
 	"fmt"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"log"
 
 	"time"
@@ -44,4 +46,42 @@ func (l *LogRepository) SaveLog(log datamodels.Log)(interface{}, error){
 
 
 	
+}
+
+
+func (l *LogRepository) CheckLogExist(logfile datamodels.Log) (bool,string){
+
+	ctx, _ := context.WithTimeout(context.Background(),5*time.Second)
+
+   result  := log_collection.FindOne(ctx,bson.M{"username":logfile.Username,"projectname":logfile.ProjectName,"logfilename":logfile.LogFileName})
+
+
+	//var resLog []bson.M
+
+	var resultLog bson.M
+
+
+
+	result.Decode(&resultLog)
+
+   	stringObjectId := resultLog["_id"].(primitive.ObjectID).Hex()
+
+
+	/*
+		check existences
+	*/
+	if len(resultLog) == 0{
+
+		return false, ""
+
+	}else{
+		return  true,stringObjectId
+	}
+
+}
+
+func (l *LogRepository) UpdateLog(){
+
+
+
 }

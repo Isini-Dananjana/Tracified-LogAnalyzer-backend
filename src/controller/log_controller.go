@@ -6,11 +6,14 @@ import (
 
 	//"flag"
 	"fmt"
+	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/datamodels"
+	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/repository"
 	"io/ioutil"
 	"log"
 	"mime/multipart"
 	"os"
 	"path/filepath"
+	"time"
 
 	//"io/ioutil"
 
@@ -56,7 +59,7 @@ func GetFileList(user string, project string) Loglist {
 	return loglist
 }
 
-
+var logrepo repository.LogRepository
 
 func LogGetFileContent(user string, project string, log string) LogContent {
 
@@ -97,15 +100,42 @@ const (
 )
 
 func LogSaveDetails(userName string, projectName string,logFileName string){
-	results,err:=models.Log_Save_Details(userName,projectName,logFileName);
 
-	if err != nil{
-		log.Fatal(err)
+	logfile := datamodels.Log{
+		Username: userName,
+		LogFileName: logFileName,
+		ProjectName: projectName,
+		LastUpdate: time.Now().String(),
 
 	}
 
-	id := results.(primitive.ObjectID);
-	fmt.Println("Successgully inserted" + id.String())
+	//res := []bson.M{}
+
+	 exist,res := logrepo.CheckLogExist(logfile)
+
+	if exist{
+
+
+	fmt.Println("Already Exist")
+	fmt.Println(res)
+
+
+
+	}else{
+
+		results,err:=models.Log_Save_Details(logfile);
+
+		if err != nil{
+			log.Fatal(err)
+
+		}
+
+		id := results.(primitive.ObjectID);
+		fmt.Println("Successfully inserted" + id.String())
+
+	}
+
+
 	
 
 }

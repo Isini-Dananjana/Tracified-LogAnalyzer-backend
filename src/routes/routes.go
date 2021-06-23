@@ -13,6 +13,11 @@ func LogRoutes() *mux.Router {
 
 		//TODO :  Configure to work with mongodb
 
+	/*
+	*
+	* TODO:Proper api naming convention
+	*/
+
 	router.HandleFunc("/api/{user}/{project}", api.GetAllLog).Methods("GET")
 
 	//upload file

@@ -77,6 +77,9 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 
 }
 
+
+
+
 type Update struct {
 	UserName    string `json:"userName"`
 	ProjectName string `json:"project"`
