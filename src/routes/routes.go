@@ -18,7 +18,7 @@ func LogRoutes() *mux.Router {
 	* TODO:Proper api naming convention
 	*/
 
-	router.HandleFunc("/api/{user}/{project}", api.GetAllLog).Methods("GET")
+	router.HandleFunc("/api/logs/{user}/", api.GetAllLog).Methods("GET")
 
 	//upload file
 	router.HandleFunc("/api/uploads/{user}/{project}/{log}", api.HandleLogFileUpload).Methods("POST")
@@ -28,6 +28,8 @@ func LogRoutes() *mux.Router {
 
 	//catch the log file updates
 	router.HandleFunc("/api/updates",api.HandleFileUpdates).Methods("POST")
+
+	
 
 	return router
 }

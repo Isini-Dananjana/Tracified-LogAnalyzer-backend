@@ -23,6 +23,11 @@ import  (
 //
 var log_collection = new (mongo.Collection)
 const LogsCollection = "Logs"
+
+/*
+	Initalizing database configeration
+*/
+
 func init(){
 
 	fmt.Println("Database Connection Established")
@@ -102,6 +107,43 @@ func (l *LogRepository) UpdateTimeStamp(objectId string){
 
 	fmt.Printf("Time stamp updated %v" ,result.MatchedCount)
 
+
+
+}
+
+
+/*
+*
+*	TODO : Change to work with userId instead 
+	of user Name
+*
+*/
+
+func (l *LogRepository) GetLogsByUser(username string) []datamodels.Log{
+
+	var logs []datamodels.Log
+
+	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
+	filterCursor, err := log_collection.Find(ctx, bson.M{"username": username})
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer filterCursor.Close(ctx)
+	for filterCursor.Next(ctx){
+
+		var log datamodels.Log
+		filterCursor.Decode(&log)
+		logs = append(logs, log)
+	}
+
+	if err := filterCursor.Err(); err != nil {
+		fmt.Println(err.Error())
+		
+	}
+
+	return logs
 
 
 }

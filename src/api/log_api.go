@@ -37,7 +37,7 @@ func GetAllLog(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
-	logs := controller.GetFileList(params["user"], params["project"])
+	logs := controller.GetFileList(params["user"])
 	json.NewEncoder(w).Encode(logs)
 
 }

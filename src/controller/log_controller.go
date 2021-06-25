@@ -12,7 +12,6 @@ import (
 	"log"
 	"mime/multipart"
 	"os"
-	"path/filepath"
 	"time"
 
 	//"io/ioutil"
@@ -35,26 +34,24 @@ type LogContent struct {
 	Content  string `json:"content"`
 }
 
-func GetFileList(user string, project string) Loglist {
+func GetFileList(user string) []datamodels.Log {
 
-	var files []string
-	// user :="tharindu"
-	//project := "project1"
-	root := "logs/" + user + "/" + project
-	//root:= "../logs/" + user + "/" + project
-	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
-		files = append(files, info.Name())
-		return nil
-	})
-	if err != nil {
-		panic(err)
-	}
+	// var files []string
+	// // user :="tharindu"
+	// //project := "project1"
+	// root := "logs/" + user + "/" + project
+	// //root:= "../logs/" + user + "/" + project
+	// err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+	// 	files = append(files, info.Name())
+	// 	return nil
+	// })
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	loglist := Loglist{
-		UserName: user,
-		Project:  project,
-		Logs:     files,
-	}
+	loglist := logrepo.GetLogsByUser(user)
+
+	
 
 	return loglist
 }
