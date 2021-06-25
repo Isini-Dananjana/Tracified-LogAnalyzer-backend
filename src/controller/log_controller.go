@@ -109,15 +109,15 @@ func LogSaveDetails(userName string, projectName string,logFileName string){
 
 	}
 
-	//res := []bson.M{}
+	
 
 	 exist,res := logrepo.CheckLogExist(logfile)
 
 	if exist{
 
 
-	fmt.Println("Already Exist")
-	fmt.Println(res)
+	fmt.Println("Log Already Exist")
+	logrepo.UpdateTimeStamp(res)
 
 
 

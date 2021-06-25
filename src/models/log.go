@@ -100,10 +100,9 @@ func Log_uploadFiles(fs filestorageHandler.FileStorage) {
 func Log_Save_Details(log datamodels.Log)(interface{},error){
 
 
-	/*
-		check exsitintess
-	*/
-	logrepo.CheckLogExist(log)
+	
+
+
 	resultID,err :=logrepo.SaveLog(log);
 	return resultID,err;
 	
