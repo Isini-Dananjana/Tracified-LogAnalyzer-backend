@@ -51,12 +51,12 @@ func (l *LogRepository) SaveLog(log datamodels.Log)(interface{}, error){
 
 func (l *LogRepository) CheckLogExist(logfile datamodels.Log) (bool,string){
 
-	ctx, _ := context.WithTimeout(context.Background(),5*time.Second)
+	ctx,_:= context.WithTimeout(context.Background(),5*time.Second)
 
    result  := log_collection.FindOne(ctx,bson.M{"username":logfile.Username,"projectname":logfile.ProjectName,"logfilename":logfile.LogFileName})
 
 
-	//var resLog []bson.M
+
 
 	var resultLog bson.M
 
@@ -64,7 +64,7 @@ func (l *LogRepository) CheckLogExist(logfile datamodels.Log) (bool,string){
 
 	result.Decode(&resultLog)
 
-   	stringObjectId := resultLog["_id"].(primitive.ObjectID).Hex()
+   	
 
 
 	/*
@@ -75,12 +75,32 @@ func (l *LogRepository) CheckLogExist(logfile datamodels.Log) (bool,string){
 		return false, ""
 
 	}else{
+		stringObjectId := resultLog["_id"].(primitive.ObjectID).Hex()
 		return  true,stringObjectId
 	}
 
 }
 
-func (l *LogRepository) UpdateLog(){
+func (l *LogRepository) UpdateTimeStamp(objectId string){
+
+	ctx,_:= context.WithTimeout(context.Background(),5*time.Second)
+
+	fmt.Println(objectId)
+	id, _ := primitive.ObjectIDFromHex(objectId)
+
+	result, err := log_collection.UpdateOne(
+		ctx,
+		bson.M{"_id": id},
+		bson.D{
+			{"$set", bson.D{{"lastupdate", time.Now().String()}}},
+		},
+	)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("Time stamp updated %v" ,result.MatchedCount)
 
 
 
