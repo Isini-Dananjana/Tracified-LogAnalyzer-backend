@@ -11,14 +11,18 @@ func LogRoutes() *mux.Router {
 
 	//Get All Log files
 
-		//TODO :  Configure to work with mongodb
+	//TODO :  Configure to work with mongodb
 
 	/*
 	*
 	* TODO:Proper api naming convention
-	*/
+	 */
 
 	router.HandleFunc("/api/logs/{user}/", api.GetAllLog).Methods("GET")
+
+	//getAllProjetcs
+	router.HandleFunc("/api/projects/{user}/", api.GetAllProjects).Methods("GET")
+
 
 	//upload file
 	router.HandleFunc("/api/uploads/{user}/{project}/{log}", api.HandleLogFileUpload).Methods("POST")
@@ -27,9 +31,7 @@ func LogRoutes() *mux.Router {
 	router.HandleFunc("/api/{user}/{project}/{logfileName}", api.GetLogFileContent).Methods("GET")
 
 	//catch the log file updates
-	router.HandleFunc("/api/updates",api.HandleFileUpdates).Methods("POST")
-
-	
+	router.HandleFunc("/api/updates", api.HandleFileUpdates).Methods("POST")
 
 	return router
 }

@@ -111,7 +111,8 @@ func Log_Save_Details(log datamodels.Log)(interface{},error){
 
 func Log_GetContent(file_object filestorageHandler.File, logfileName string) []byte {
 
-	fileExtension := os.Getenv("FILE_EXT")
+	//fileExtension := os.Getenv("FILE_EXT")
+	fileExtension := ".txt"
 
 	err := file_object.GetContent()
 	if err != nil {

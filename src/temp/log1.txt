@@ -1,0 +1,133 @@
+Started by timer
+Building in workspace /Users/Shared/Jenkins/Home/jobs/PagePlanner/workspace
+Updating https://pageplanner.atlassian.net/svn/PPM/trunk/PagePlanner
+At revision 1465
+no change for https://pageplanner.atlassian.net/svn/PPM/trunk/PagePlanner since the previous build
+[workspace] $ /bin/sh -xe /var/folders/15/7__2sw5j4cx7x33580nnxlz800007c/T/hudson3341074876905766255.sh
++ xcodebuild -workspace PagePlanner.xcworkspace -scheme PagePlanner -sdk macosx10.8 -configuration Debug CONFIGURATION_BUILD_DIR=/Users/Shared/Jenkins/Home/jobs/PagePlanner/workspace/Build/Products/Debug
+Build settings from command line:
+    CONFIGURATION_BUILD_DIR = /Users/Shared/Jenkins/Home/jobs/PagePlanner/workspace/Build/Products/Debug
+    SDKROOT = macosx10.8
+
+=== BUILD NATIVE TARGET Utils OF PROJECT Utils WITH CONFIGURATION Debug ===
+Check dependencies
+
+
+=== BUILD NATIVE TARGET DataContracts OF PROJECT DataContracts WITH CONFIGURATION Debug ===
+Check dependencies
+
+
+=== BUILD NATIVE TARGET Common OF PROJECT Common WITH CONFIGURATION Debug ===
+Check dependencies
+
+
+=== BUILD NATIVE TARGET PagePlanner OF PROJECT PagePlanner WITH CONFIGURATION Debug ===
+Check dependencies
+warning: no rule to process file '$(PROJECT_DIR)/PagePlanner/Client/Panels/LayoutMaster/Controllers/ContainerLayoutMasterTemplatesPanelItemViewController.h' of type sourcecode.c.h for architecture x86_64
+warning: no rule to process file '$(PROJECT_DIR)/PagePlanner/Client/Panels/LayoutMaster/ViewModels/ContainerLayoutMasterTemplatesPanelItemViewModel.h' of type sourcecode.c.h for architecture x86_64
+warning: no rule to process file '$(PROJECT_DIR)/PagePlanner/Client/Panels/LayoutMaster/Helpers/LayoutMasterTemplatesPanelItemDefinition.h' of type sourcecode.c.h for architecture x86_64
+warning: no rule to process file '$(PROJECT_DIR)/PagePlanner/Client/Panels/LayoutMaster/ViewModels/LayoutTemplateViewModel.h' of type sourcecode.c.h for architecture x86_64
+warning: no rule to process file '$(PROJECT_DIR)/PagePlanner/Client/Panels/LayoutMaster/ViewModels/LayoutTemplateMasterViewModel.h' of type sourcecode.c.h for architecture x86_64
+warning: no rule to process file '$(PROJECT_DIR)/PagePlanner/Client/Story/View Models/StoryVM.h' of type sourcecode.c.h for architecture x86_64
+
+
+** BUILD SUCCEEDED **
+
+[workspace] $ /bin/sh -xe /var/folders/15/7__2sw5j4cx7x33580nnxlz800007c/T/hudson2732348716973997789.sh
++ xcodebuild -workspace PagePlanner.xcworkspace -scheme PagePlanner test -configuration Debug -sdk macosx10.8 TEST_AFTER_BUILD=YES
++ /usr/bin/ocunit2junit.rb
+2013-07-08 00:01:41.461 xcodebuild[79546:120b] [MT] DVTAssertions: Warning in /SourceCache/IDEFoundation/IDEFoundation-2100/Framework/Classes/Model/Testing/IDETestManager.m:161
+Details:  Failed to create directory for test results: "/Users/Shared/Jenkins/Home/jobs/PagePlanner/workspace/DerivedData/PagePlanner/TestResults/2013-07-08 00.01.41 +0200.xctestresults", error: Error Domain=NSCocoaErrorDomain Code=513 "You don‚Äôt have permission to save the file ‚ÄúTestResults‚Äù in the folder ‚ÄúPagePlanner‚Äù." UserInfo=0x405569cc0 {NSFilePath=/Users/Shared/Jenkins/Home/jobs/PagePlanner/workspace/DerivedData/PagePlanner/TestResults, NSUnderlyingError=0x405569d80 "The operation couldn‚Äôt be completed. Permission denied"}
+Object:   <IDETestManager: 0x4007ab060>
+Method:   -_writeTestResultsBundleForTestRunners:allTestsPassed:
+Thread:   <NSThread: 0x40030a1e0>{name = (null), num = 1}
+Please file a bug at http://bugreport.apple.com with this warning message and any useful information you can provide.
+Build settings from command line:
+    SDKROOT = macosx10.8
+    TEST_AFTER_BUILD = YES
+
+=== BUILD NATIVE TARGET Utils OF PROJECT Utils WITH CONFIGURATION Debug ===
+Check dependencies
+
+SymLink /Users/Shared/Jenkins/Home/jobs/PagePlanner/workspace/Build/Products/Debug/Utils.framework/Versions/Current A
+    cd /Users/Shared/Jenkins/Home/jobs/PagePlanner/workspace/Utils
+    /bin/ln -sf A /Users/Shared/Jenkins/Home/jobs/PagePlanner/workspace/Build/Products/Debug/Utils.framework/Versions/Current
+
+_RegisterApplication(), FAILED TO establish the default connection to the WindowServer, _CGSDefaultConnection() is NULL.
+Test Suite '/Users/Shared/Jenkins/Home/jobs/PagePlanner/workspace/Build/Products/Debug/PagePlannerTests.octest(Tests)' started at 2013-07-07 22:01:41 +0000
+Test Suite 'ApiNotificationManagerTests' started at 2013-07-07 22:01:41 +0000
+Test Case '-[ApiNotificationManagerTests testThatClassExists]' started.
+Test Case '-[ApiNotificationManagerTests testThatClassExists]' passed (0.000 seconds).
+Test Case '-[ApiNotificationManagerTests testapiIdentifiers__propertyExists]' started.
+Test Case '-[ApiNotificationManagerTests testapiIdentifiers__propertyExists]' passed (0.000 seconds).
+Test Case '-[ApiNotificationManagerTests testapiIdentifiers_whenObjectCreatedThroughDI_propertyInjectedProperly]' started.
+Test Case '-[ApiNotificationManagerTests testapiIdentifiers_whenObjectCreatedThroughDI_propertyInjectedProperly]' passed (0.000 seconds).
+Test Case '-[ApiNotificationManagerTests testhandleApiNoifications__methodExists]' started.
+Test Case '-[ApiNotificationManagerTests testhandleApiNoifications__methodExists]' passed (0.000 seconds).
+Test Case '-[ApiNotificationManagerTests testhandleApiNoifications_calledWithNullRequest_doesNotThrow]' started.
+Test Case '-[ApiNotificationManagerTests testhandleApiNoifications_calledWithNullRequest_doesNotThrow]' passed (0.000 seconds).
+Test Case '-[ApiNotificationManagerTests testhandleApiNoifications_calledWithNullResult_doesNotThrow]' started.
+Test Case '-[ApiNotificationManagerTests testhandleApiNoifications_calledWithNullResult_doesNotThrow]' passed (0.000 seconds).
+Test Case '-[ApiNotificationManagerTests testnotificationTranslations_propertyExists]' started.
+Test Case '-[ApiNotificationManagerTests testnotificationTranslations_propertyExists]' passed (0.000 seconds).
+Test Case '-[ApiNotificationManagerTests testnotificationTranslations_whenObjectCreatedThroughDI_propertyInjectedProperly]' started.
+Test Case '-[ApiNotificationManagerTests testnotificationTranslations_whenObjectCreatedThroughDI_propertyInjectedProperly]' passed (0.000 seconds).
+Test Suite 'ApiNotificationManagerTests' finished at 2013-07-07 22:01:41 +0000.
+Executed 8 tests, with 0 failures (0 unexpected) in 0.001 (0.002) seconds
+Test Suite 'ApplicationCacheTests' started at 2013-07-07 22:01:41 +0000
+Test Case '-[ApplicationCacheTests testGetUserForId_InValidId_ReturnsNil]' started.
+Test Case '-[ApplicationCacheTests testGetUserForId_InValidId_ReturnsNil]' passed (0.000 seconds).
+Test Case '-[ApplicationCacheTests testGetUserForId_ValidId_ReturnsUser]' started.
+Test Case '-[ApplicationCacheTests testGetUserForId_ValidId_ReturnsUser]' passed (0.000 seconds).
+Test Suite 'ApplicationCacheTests' finished at 2013-07-07 22:01:41 +0000.
+Executed 2 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'ApplicationControllerTests' started at 2013-07-07 22:01:41 +0000
+Test Case '-[ApplicationControllerTests testLoginFunctionBeingCalledAtInitialize]' started.
+Test Case '-[ApplicationControllerTests testLoginFunctionBeingCalledAtInitialize]' passed (0.000 seconds).
+Test Case '-[ApplicationControllerTests testOpenWindowFunctionBeingCalledAtOnAuthenticationSucceeded]' started.
+Test Case '-[ApplicationControllerTests testOpenWindowFunctionBeingCalledAtOnAuthenticationSucceeded]' passed (0.000 seconds).
+Test Case '-[ApplicationControllerTests testRegisterMessages_whenDestroyed_unregistersForPluginLoadedMessage]' started.
+Test Case '-[ApplicationControllerTests testRegisterMessages_whenDestroyed_unregistersForPluginLoadedMessage]' passed (0.000 seconds).
+Test Suite 'ApplicationControllerTests' finished at 2013-07-07 22:01:41 +0000.
+Executed 3 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'BindingTypeModelTests' started at 2013-07-07 22:01:41 +0000
+Test Case '-[BindingTypeModelTests testThatClassExists]' started.
+Test Case '-[BindingTypeModelTests testThatClassExists]' passed (0.000 seconds).
+Test Case '-[BindingTypeModelTests testfillWithBindingType__methodExist]' started.
+Test Case '-[BindingTypeModelTests testfillWithBindingType__methodExist]' passed (0.000 seconds).
+Test Case '-[BindingTypeModelTests testfillWithBindingType_bindingTypeWithId_shouldCopyIdCorrectly]' started.
+Test Case '-[BindingTypeModelTests testfillWithBindingType_bindingTypeWithId_shouldCopyIdCorrectly]' passed (0.000 seconds).
+Test Case '-[BindingTypeModelTests testfillWithBindingType_bindingTypeWithName_shouldCopyNameCorrectly]' started.
+Test Case '-[BindingTypeModelTests testfillWithBindingType_bindingTypeWithName_shouldCopyNameCorrectly]' passed (0.000 seconds).
+Test Case '-[BindingTypeModelTests testidentifier__propertyExist]' started.
+Test Case '-[BindingTypeModelTests testidentifier__propertyExist]' passed (0.000 seconds).
+Test Case '-[BindingTypeModelTests testname__propertyExist]' started.
+Test Case '-[BindingTypeModelTests testname__propertyExist]' passed (0.000 seconds).
+Test Suite 'BindingTypeModelTests' finished at 2013-07-07 22:01:41 +0000.
+Executed 6 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'ChildDataTests' started at 2013-07-07 22:01:41 +0000
+Test Case '-[ChildDataTests testGrandChildren]' started.
+Test Case '-[ChildDataTests testGrandChildren]' passed (0.002 seconds).
+Test Case '-[ChildDataTests testWhetherIssueReadsPublicationFormatCorrectly]' started.
+Test Case '-[ChildDataTests testWhetherIssueReadsPublicationFormatCorrectly]' passed (0.002 seconds).
+Test Case '-[ChildDataTests testWhetherServerReadsCorrectly]' started.
+Test Case '-[ChildDataTests testWhetherServerReadsCorrectly]' passed (0.000 seconds).
+Test Suite 'ChildDataTests' finished at 2013-07-07 22:01:41 +0000.
+Executed 3 tests, with 0 failures (0 unexpected) in 0.005 (0.005) seconds
+Test Suite 'ColorArgbFromStringTests' started at 2013-07-07 22:01:41 +0000
+Test Case '-[ColorArgbFromStringTests testColorArgb_withInvalidNumber_NumerIs0]' started.
+Test Case '-[ColorArgbFromStringTests testColorArgb_withInvalidNumber_NumerIs0]' passed (0.000 seconds).
+Test Case '-[ColorArgbFromStringTests testColorArgb_withValidNumber_NumerCorrect]' started.
+Test Case '-[ColorArgbFromStringTests testColorArgb_withValidNumber_NumerCorrect]' passed (0.000 seconds).
+Test Suite 'ColorArgbFromStringTests' finished at 2013-07-07 22:01:41 +0000.
+Executed 2 tests, with 0 failures (0 unexpected) in 0.000 (0.001) seconds
+Test Suite 'ContainerChangedNotificationHandlerTests' started at 2013-07-07 22:01:41 +0000
+Test Case '-[ContainerChangedNotificationHandlerTests testThatCorrectRequestIsSentForApiNotification]' started.
+Test Case '-[ContainerChangedNotificationHandlerTests testThatCorrectRequestIsSentForApiNotification]' passed (0.000 seconds).
+Test Case '-[ContainerChangedNotificationHandlerTests testThatCorrectRequestIsSentForBinaryNotification]' started.
+Test Case '-[ContainerChangedNotificationHandlerTests testThatCorrectRequestIsSentForBinaryNotification]' passed (0.000 seconds).
+Test Case '-[ContainerChangedNotificationHandlerTests testThatWrongApiClassResultsInThrow]' started.
+2013-07-08 00:01:41.085 otest[79661:303] -[SessionManagerMockForNotificationHandlerTests containerId]: unrecognized selector sent to instance 0x7f95eceee710
+Test Case '-[ContainerChangedNotificationHandlerTests testThatWrongApiClassResultsInThrow]' passed (0.000 seconds).
+Test Suite 'ContainerChangedNotificationHandlerTests' finished at 2013-07-07 22:01:41 +0000.
+Executed 3 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds

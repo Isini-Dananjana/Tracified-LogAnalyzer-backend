@@ -12,6 +12,7 @@ import  (
 	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/datamodels"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	
 )
 
 // type LogRepository interface {
@@ -32,7 +33,7 @@ func init(){
 
 	fmt.Println("Database Connection Established")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
+	clientOptions := options.Client().ApplyURI("mongodb+srv://tharindu:tharindu@cluster0.vnll5.mongodb.net/myFirstDB?retryWrites=true&w=majority")
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		log.Fatal(err)
@@ -123,7 +124,9 @@ func (l *LogRepository) GetLogsByUser(username string) []datamodels.Log{
 
 	var logs []datamodels.Log
 
-	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	
 	filterCursor, err := log_collection.Find(ctx, bson.M{"username": username})
 
 	if err != nil {
@@ -145,5 +148,35 @@ func (l *LogRepository) GetLogsByUser(username string) []datamodels.Log{
 
 	return logs
 
+
+}
+
+
+
+func (l *LogRepository) GetProjectsByUser(username string) (interface{}){
+
+	//var projetcs []string
+	//projetcs[0] = "23"
+
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	//_ ,err:= log_collection.Distinct(ctx,"projectname",bson.M{"username": username})
+
+	projetcs,err:= log_collection.Distinct(ctx,"projectname",bson.D{{"username",username}})
+
+	//fmt.Println(result.)
+	
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	
+	
+
+
+
+
+	return projetcs
 
 }

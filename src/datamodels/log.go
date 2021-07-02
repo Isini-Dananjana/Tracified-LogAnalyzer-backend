@@ -3,8 +3,8 @@ package datamodels
 
 
 type Log struct {
-	Username    string `json:"uname"`
-	ProjectName string `json:"proname"`
-	LogFileName string `json:"log"`
-	LastUpdate  string `json:"lastUP"`
+	Username    string `json:"username"`
+	ProjectName string `json:"projectname"`
+	LogFileName string `json:"logfilename"`
+	LastUpdate  string `json:"lastupdate"`
 }

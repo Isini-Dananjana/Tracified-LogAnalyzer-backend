@@ -22,6 +22,8 @@ import (
 */
 func GetLogFileContent(w http.ResponseWriter, r *http.Request) {
 
+
+	
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 	logs := controller.LogGetFileContent(params["user"], params["project"], params["logfileName"])
@@ -35,9 +37,20 @@ func GetLogFileContent(w http.ResponseWriter, r *http.Request) {
 
 func GetAllLog(w http.ResponseWriter, r *http.Request) {
 
+	
+	
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
 	logs := controller.GetFileList(params["user"])
+	json.NewEncoder(w).Encode(logs)
+
+}
+
+func GetAllProjects(w http.ResponseWriter, r *http.Request){
+
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	logs := controller.GetProjects(params["user"])
 	json.NewEncoder(w).Encode(logs)
 
 }
@@ -48,6 +61,8 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 
 	
 	w.Header().Set("Content-Type", "application/json")
+	//token := r.Header.Get("Token")
+	//fmt.Println(token)
 	params := mux.Vars(r)
 
 	fmt.Println("File Upload Endpoint Hit")

@@ -6,12 +6,15 @@ import (
 
 	//"flag"
 	"fmt"
-	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/datamodels"
-	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/repository"
 	"io/ioutil"
 	"log"
 	"mime/multipart"
 	"os"
+
+	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/datamodels"
+	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/repository"
+
+	//"os"
 	"time"
 
 	//"io/ioutil"
@@ -56,16 +59,25 @@ func GetFileList(user string) []datamodels.Log {
 	return loglist
 }
 
+
+func GetProjects(user string) (interface{}){
+
+	projectList := logrepo.GetProjectsByUser(user)
+
+	return projectList
+}
 var logrepo repository.LogRepository
 
 func LogGetFileContent(user string, project string, log string) LogContent {
 
+	fmt.Println(user)
 	bucket := "leadl/logs/" + user + "/" + project + "/"
 	
 	/*
 		TODO:change extension to config
 	*/
 	item := log + os.Getenv("BUCKET_ITEM_EXT")
+	//item := log + ".txt.zip"
 
 	//fmt.Print(bucket+item)
 
