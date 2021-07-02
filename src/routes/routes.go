@@ -38,6 +38,10 @@ func LogRoutes() *mux.Router {
 
 	router.HandleFunc("/api/updates",api.HandleFileUpdates).Methods("POST")
 
+	//GetLogsByUserandProject
+
+	router.HandleFunc("/logapi/{user}/{project}",api.GetLogListByUsernProject).Methods("GET")
+
 	//router.Use(middleware.LoggingMiddleware)
 
 

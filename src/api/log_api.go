@@ -56,6 +56,19 @@ func GetAllProjects(w http.ResponseWriter, r *http.Request){
 }
 
 
+//
+
+func GetLogListByUsernProject(w http.ResponseWriter, r *http.Request){
+
+	fmt.Println("GotHere")
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	//logs := controller.GetProjects(params["user"])
+	logs:= controller.GetLogListByUsernProject(params["user"],params["project"])
+	json.NewEncoder(w).Encode(logs)
+
+}
+
 
 func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 

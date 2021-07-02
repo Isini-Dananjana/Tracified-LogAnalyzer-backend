@@ -68,6 +68,12 @@ func GetProjects(user string) (interface{}){
 }
 var logrepo repository.LogRepository
 
+func GetLogListByUsernProject(user string,project string)(interface{}){
+	logList := logrepo.GetLogsByUser_Project(user,project);
+	return logList
+	
+}
+
 func LogGetFileContent(user string, project string, log string) LogContent {
 
 	fmt.Println(user)

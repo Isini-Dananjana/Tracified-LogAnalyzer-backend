@@ -151,6 +151,37 @@ func (l *LogRepository) GetLogsByUser(username string) []datamodels.Log{
 
 }
 
+func(l *LogRepository)GetLogsByUser_Project(username string,projectname string)[]datamodels.Log{
+
+	var logs []datamodels.Log
+
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	
+	filterCursor, err := log_collection.Find(ctx, bson.M{"username": username,"projectname":projectname})
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer filterCursor.Close(ctx)
+	for filterCursor.Next(ctx){
+
+		var log datamodels.Log
+		filterCursor.Decode(&log)
+		logs = append(logs, log)
+	}
+
+	if err := filterCursor.Err(); err != nil {
+		fmt.Println(err.Error())
+		
+	}
+
+
+	return logs
+
+}
+
 
 
 func (l *LogRepository) GetProjectsByUser(username string) (interface{}){
