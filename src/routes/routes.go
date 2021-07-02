@@ -3,6 +3,8 @@ package routes
 import (
 	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/api"
 	"github.com/gorilla/mux"
+	//"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/middleware"
+
 )
 
 func LogRoutes() *mux.Router {
@@ -31,7 +33,13 @@ func LogRoutes() *mux.Router {
 	router.HandleFunc("/api/{user}/{project}/{logfileName}", api.GetLogFileContent).Methods("GET")
 
 	//catch the log file updates
-	router.HandleFunc("/api/updates", api.HandleFileUpdates).Methods("POST")
+
+
+
+	router.HandleFunc("/api/updates",api.HandleFileUpdates).Methods("POST")
+
+	//router.Use(middleware.LoggingMiddleware)
+
 
 	return router
 }
