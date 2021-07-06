@@ -76,7 +76,7 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	//token := r.Header.Get("Token")
 	//fmt.Println(token)
-	params := mux.Vars(r)
+	//params := mux.Vars(r)
 
 	fmt.Println("File Upload Endpoint Hit")
 
@@ -85,11 +85,24 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 	// it also returns the FileHeader so we can get the Filename,
 	// the Header and the size of the file
 	file, handler, err := r.FormFile("myFile")
+	userName:=r.FormValue("userName")
+	projectName:=r.FormValue("projectName")
+	fileName:=r.FormValue("fileName")
+	// fmt.Println(userName)
+	// fmt.Println(projectName)
+	// fmt.Println(fileName)
+
+	// fmt.Println("===PARAMS=====")
+	// fmt.Println(params["user"])
+	// fmt.Println(params["project"])
+	// fmt.Println(params["log"])
+
 	if err != nil {
 		fmt.Println("Error Retrieving the File")
 		fmt.Println(err)
 		return
 	}
+	
 	defer file.Close()
 	fmt.Printf("Uploaded File: %+v\n", handler.Filename)
 	fmt.Printf("File Size: %+v\n", handler.Size)
@@ -97,11 +110,11 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 
 
 	//aws upload path
-	fullFilePath := "logs/" + params["user"] + "/" + params["project"] + "/" + params["log"]
+	fullFilePath := "logs/" + userName + "/" + projectName + "/" + fileName
 
 	//controller.LogUploadFiles(fullFilePath, file)
 	controller.LogUploadFiles(fullFilePath,file)
-	controller.LogSaveDetails(params["user"],params["project"],params["log"])
+	//controller.LogSaveDetails(params["user"],params["project"],params["log"])
 
 }
 
