@@ -35,6 +35,7 @@ func main() {
 	//Load the env file
 	LoadEnv()
 	http.Handle("/api/", router)
+	log.Println("Server Started localhost :3000")
 	log.Fatal(http.ListenAndServe(":3000", handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"http://localhost:4200"}))(router)))
 
 	
