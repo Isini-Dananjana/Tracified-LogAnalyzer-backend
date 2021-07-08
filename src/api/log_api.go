@@ -6,6 +6,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	//"log"
 
 	//"io/ioutil"
 	//"log"
@@ -15,7 +16,6 @@ import (
 	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/controller"
 	"github.com/gorilla/mux"
 )
-
 
 /*
 	Read the content of log file
@@ -28,6 +28,19 @@ func GetLogFileContent(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	logs := controller.LogGetFileContent(params["user"], params["project"], params["logfileName"])
 	json.NewEncoder(w).Encode(logs)
+
+}
+
+
+func GetLogFileContentv2(w http.ResponseWriter, r *http.Request) {
+
+
+	
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	//logs := controller.LogGetFileContent(params["user"], params["project"], params["logfileName"])
+	log := controller.LogGetFileContentv2(params["fileId"])
+	json.NewEncoder(w).Encode(log)
 
 }
 
@@ -84,10 +97,12 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 	// FormFile returns the first file for the given key `myFile`
 	// it also returns the FileHeader so we can get the Filename,
 	// the Header and the size of the file
-	file, handler, err := r.FormFile("myFile")
+	file, handler, err := r.FormFile("logFile")
 	userName:=r.FormValue("userName")
 	projectName:=r.FormValue("projectName")
 	fileName:=r.FormValue("fileName")
+	fileId:=r.FormValue("fileId")
+
 	// fmt.Println(userName)
 	// fmt.Println(projectName)
 	// fmt.Println(fileName)
@@ -114,7 +129,7 @@ func HandleLogFileUpload(w http.ResponseWriter, r *http.Request) {
 
 	//controller.LogUploadFiles(fullFilePath, file)
 	controller.LogUploadFiles(fullFilePath,file)
-	//controller.LogSaveDetails(params["user"],params["project"],params["log"])
+	controller.LogSaveDetails(userName,projectName,fileName,fileId)
 
 }
 

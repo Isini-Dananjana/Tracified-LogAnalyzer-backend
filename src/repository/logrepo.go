@@ -211,3 +211,26 @@ func (l *LogRepository) GetProjectsByUser(username string) (interface{}){
 	return projetcs
 
 }
+
+
+func (l *LogRepository) GetLogFileDetails(fileId string)(datamodels.Log){
+
+
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	fmt.Println("No issue here id : " + fileId)
+	var resultDecode datamodels.Log
+	result  := log_collection.FindOne(ctx,bson.M{"fileid":fileId})
+
+	result.Decode(&resultDecode)
+
+
+	
+	//result := log_collection.FindId()
+
+	return resultDecode
+
+
+
+}

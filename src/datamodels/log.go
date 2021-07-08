@@ -7,4 +7,5 @@ type Log struct {
 	ProjectName string `json:"projectname"`
 	LogFileName string `json:"logfilename"`
 	LastUpdate  string `json:"lastupdate"`
+	FileId  		string `json:"fileId"`
 }

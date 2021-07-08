@@ -32,7 +32,11 @@ func LogRoutes() *mux.Router {
 	router.HandleFunc("/api/uploads/", api.HandleLogFileUpload).Methods("POST")
 
 	//read the log file content
-	router.HandleFunc("/api/{user}/{project}/{logfileName}", api.GetLogFileContent).Methods("GET")
+	//router.HandleFunc("/api/{user}/{project}/{logfileName}", api.GetLogFileContent).Methods("GET")
+
+	//get log file content v2
+
+	router.HandleFunc("/api/v2/content/{fileId}",api.GetLogFileContentv2).Methods("GET")
 
 	//catch the log file updates
 
@@ -43,6 +47,7 @@ func LogRoutes() *mux.Router {
 	//GetLogsByUserandProject
 
 	router.HandleFunc("/logapi/{user}/{project}",api.GetLogListByUsernProject).Methods("GET")
+	router.HandleFunc("/api/logs/getByProject/{user}/{project}",api.GetLogListByUsernProject).Methods("GET")
 	router.HandleFunc("/ws",websocket.WSPage).Methods("GET")
 
 
