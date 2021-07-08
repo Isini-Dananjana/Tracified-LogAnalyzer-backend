@@ -130,4 +130,4 @@ Test Case '-[ContainerChangedNotificationHandlerTests testThatWrongApiClassResul
 2013-07-08 00:01:41.085 otest[79661:303] -[SessionManagerMockForNotificationHandlerTests containerId]: unrecognized selector sent to instance 0x7f95eceee710
 Test Case '-[ContainerChangedNotificationHandlerTests testThatWrongApiClassResultsInThrow]' passed (0.000 seconds).
 Test Suite 'ContainerChangedNotificationHandlerTests' finished at 2013-07-07 22:01:41 +0000.
-Executed 3 tests, with 0 failures (0 unexpected) in 0.001 (0.001) seconds
+

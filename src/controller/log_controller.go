@@ -10,6 +10,7 @@ import (
 	"log"
 	"mime/multipart"
 	"os"
+	"path/filepath"
 
 	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/datamodels"
 	"github.com/TharinduBalasooriya/LogAnalyzerBackend/src/repository"
@@ -76,7 +77,7 @@ func GetLogListByUsernProject(user string,project string)(interface{}){
 
 func LogGetFileContent(user string, project string, log string) LogContent {
 
-	fmt.Println(user)
+	//fmt.Println(user)
 	bucket := "leadl/logs/" + user + "/" + project + "/"
 	
 	/*
@@ -114,13 +115,62 @@ const (
 	S3_BUCKET = "leadl"
 )
 
-func LogSaveDetails(userName string, projectName string,logFileName string){
+func LogGetFileContentv2(fileId string) (interface{}){
+
+	
+	logFileDetails := logrepo.GetLogFileDetails(fileId)
+	user := logFileDetails.Username
+	project := logFileDetails.ProjectName
+	var filename = logFileDetails.LogFileName
+	var extension = filepath.Ext(filename)
+	var log = filename[0:len(filename)-len(extension)]
+
+
+
+	bucket := "leadl/logs/" + user + "/" + project + "/"
+	
+	/*
+		TODO:change extension to config
+	*/
+	item := log + os.Getenv("BUCKET_ITEM_EXT")
+	//item := log + ".txt.zip"
+
+	//fmt.Print(bucket+item)
+
+	object := filestorageHandler.AWS_S3_Object{
+		Bucket: bucket,
+		Item:   item,
+	}
+
+	data := models.Log_GetContent(object, log)
+
+	var dataT = string(data)
+
+	logcontent := LogContent{
+		FileName: log,
+		Content:  dataT,
+	}
+
+	/*
+		
+		TODO:Handle download time
+	*/
+	return logcontent
+	
+	
+	//return logFileDetails
+
+}
+
+func LogSaveDetails(userName string, projectName string,logFileName string,fileID string){
 
 	logfile := datamodels.Log{
 		Username: userName,
+		FileId:fileID ,
 		LogFileName: logFileName,
 		ProjectName: projectName,
 		LastUpdate: time.Now().String(),
+		
 
 	}
 
